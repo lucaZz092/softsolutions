@@ -3,6 +3,12 @@ import { Mail, Phone, MapPin, Linkedin, Github, Globe } from "lucide-react";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  function scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -17,10 +23,10 @@ const Footer = () => {
               Sua parceira de confiança em tecnologia.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.linkedin.com/in/perfil-lucas-mendonca/" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://github.com/lucaZz092" className="text-muted-foreground hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -33,10 +39,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold text-foreground mb-4">Serviços</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Desenvolvimento Web</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Apps Mobile</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cloud Solutions</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Consultoria</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Desenvolvimento Web</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Apps Mobile</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Cloud Solutions</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Consultoria</a></li>
             </ul>
           </div>
 
@@ -44,10 +50,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold text-foreground mb-4">Tecnologias</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">React & TypeScript</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Node.js & Python</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">AWS & Docker</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">PostgreSQL & MongoDB</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">React & TypeScript</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Node.js & Python</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">AWS & Docker</a></li>
+              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">PostgreSQL & MongoDB</a></li>
             </ul>
           </div>
 
@@ -61,7 +67,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">+55 (11) 99999-9999</span>
+                <span className="text-muted-foreground">+55 (11) 97873-7155</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-primary" />

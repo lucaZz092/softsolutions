@@ -40,8 +40,7 @@ const Header = () => {
               </button>
               <button
                 onClick={() => scrollToSection("about")}
-                className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
+                className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 Sobre
               </button>
               <button

@@ -52,7 +52,7 @@ const Contact = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Telefone",
-      content: "+55 (11) 99999-9999",
+      content: "+55 (11) 97837-7155",
       description: "Seg-Sex, 9h às 18h"
     },
     {
@@ -180,7 +180,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold text-card-foreground mb-1">{info.title}</h3>
-                        <p className="text-primary font-medium">{info.content}</p>
+                        <p className="text-primary font-medium break-words whitespace-pre-line max-w-[120px] overflow-hidden">{info.content}</p>                        
                         <p className="text-sm text-muted-foreground">{info.description}</p>
                       </div>
                     </div>
@@ -200,8 +200,7 @@ const Contact = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button 
                     variant="secondary"
-                    className="bg-white/20 hover:bg-white/30 border-white/30 text-white font-semibold"
-                  >
+                    className="bg-white/20 hover:bg-white/30 border-white/30 text-white font-semibold">
                     <Phone className="mr-2 h-4 w-4" />
                     Ligar Agora
                   </Button>
@@ -221,15 +220,21 @@ const Contact = () => {
               <CardContent className="p-0">
                 <h3 className="font-semibold text-card-foreground mb-4 text-center">Conecte-se Conosco</h3>
                 <div className="flex justify-center space-x-4">
-                  <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                    <Linkedin className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                    <Mail className="h-4 w-4" />
-                  </Button>
+                  <a href="www.linkedin.com/in/perfil-lucas-mendonca" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                      <Linkedin className="h-4 w-4" />
+                    </Button>
+                  </a>
+                  <a href="mailto:contato@softsolutions.com.br" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                      <Mail className="h-4 w-4" />
+                    </Button>
+                  </a>
+                  <a href="" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                     <Globe className="h-4 w-4" />
                   </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>
