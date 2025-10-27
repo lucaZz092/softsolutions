@@ -46,7 +46,7 @@ const Hero = () => {
               onClick={scrollToContact}
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Começar Projeto
+              Enviar Mensagem
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
