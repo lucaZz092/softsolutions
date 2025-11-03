@@ -23,16 +23,47 @@ const Contact = () => {
     company: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    toast({
-      title: "Mensagem enviada!",
-      description: "Entraremos em contato em breve. Obrigado pelo interesse!",
-    });
-    setFormData({ name: "", email: "", company: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('http://localhost:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast({
+          title: "✅ Mensagem enviada com sucesso!",
+          description: "Obrigado pelo contato! Retornaremos em breve.",
+        });
+        setFormData({ name: "", email: "", company: "", message: "" });
+      } else {
+        toast({
+          title: "❌ Erro ao enviar mensagem",
+          description: data.message || "Por favor, tente novamente.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      toast({
+        title: "❌ Erro ao enviar mensagem",
+        description: "Verifique se o servidor está rodando e tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -156,10 +187,11 @@ const Contact = () => {
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="mr-2 h-5 w-5" />
-                  Enviar Mensagem
+                  {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
                 </Button>
               </form>
             </CardContent>
