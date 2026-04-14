@@ -188,10 +188,15 @@ const Contact = () => {
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative group"
                 >
-                  <Send className="mr-2 h-5 w-5" />
-                  {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+                  <Send className={`mr-2 h-5 w-5 ${isSubmitting ? 'animate-spin' : 'group-hover:translate-x-1 transition-transform'}`} />
+                  <span className={isSubmitting ? 'opacity-100' : 'opacity-100'}>
+                    {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+                  </span>
+                  {isSubmitting && (
+                    <div className="absolute inset-0 rounded bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                  )}
                 </Button>
               </form>
             </CardContent>
