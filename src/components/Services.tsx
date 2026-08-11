@@ -67,11 +67,6 @@ const Services = () => {
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-background to-secondary/10 relative">
       <div className="absolute top-10 right-10 opacity-10 hidden lg:block">
-        <img 
-          src={techIllustration} 
-          alt="Ilustração de tecnologia" 
-          className="w-64 h-48 object-cover rounded-lg"
-        />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
