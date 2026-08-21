@@ -41,7 +41,11 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || `A API respondeu com status ${response.status}.`);
+      }
 
       if (data.success) {
         toast({
@@ -57,10 +61,12 @@ const Contact = () => {
         });
       }
     } catch (error) {
-      console.error('Erro:', error);
+      console.error('Erro ao enviar formulário:', error);
       toast({
         title: "❌ Erro ao enviar mensagem",
-        description: "Verifique se o servidor está rodando e tente novamente.",
+        description: error instanceof Error
+          ? error.message
+          : "Não foi possível conectar ao servidor. Verifique se a API está rodando.",
         variant: "destructive",
       });
     } finally {
