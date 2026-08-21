@@ -12,6 +12,13 @@ export default defineConfig(({ mode }) => ({
       "/api": "http://localhost:3001",
     },
   },
+  preview: {
+    host: true,
+    port: 4173,
+    proxy: {
+      "/api": "http://localhost:3001",
+    },
+  },
   plugins: [
     react(),
     mode === 'development' &&
