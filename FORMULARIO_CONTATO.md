@@ -56,18 +56,18 @@ INICIO_RAPIDO.md           # Guia de 5 minutos para começar
 ```bash
 npm run dev
 ```
-Isso inicia o site em: http://localhost:5173
+Isso inicia o site em: http://localhost:8080
 
 **Terminal 2 - Backend:**
 ```bash
 cd backend
-node server.js
+npm start
 ```
 Isso inicia a API em: http://localhost:3001
 
 ### Passo 2: Teste o Formulário
 
-1. Abra http://localhost:5173
+1. Abra http://localhost:8080
 2. Role até a seção "Contato"
 3. Preencha o formulário
 4. Clique em "Enviar Mensagem"
@@ -169,8 +169,8 @@ Para colocar em produção:
    - Anotar a URL da API
 
 2. **Frontend**:
-   - Atualizar `Contact.tsx` com a URL da API real
-   - Substituir `http://localhost:3001` pela URL do backend
+   - Definir `VITE_API_URL` com a URL pública do backend
+   - Fazer um novo build do frontend
    - Deploy no Vercel, Netlify, etc.
 
 ## 📞 Status Atual
