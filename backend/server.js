@@ -7,6 +7,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const emailConfigured = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 
 // Middleware
 app.use(cors());
@@ -35,6 +36,13 @@ app.post('/api/contact', async (req, res) => {
     return res.status(400).json({ 
       success: false, 
       message: 'Por favor, preencha todos os campos obrigatórios.' 
+    });
+  }
+
+  if (!emailConfigured) {
+    return res.status(503).json({
+      success: false,
+      message: 'O servidor de email não está configurado. Defina EMAIL_USER e EMAIL_PASS no arquivo backend/.env.',
     });
   }
 

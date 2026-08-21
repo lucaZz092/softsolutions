@@ -16,6 +16,8 @@ import {
   Globe
 } from "lucide-react";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -31,7 +33,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3001/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
