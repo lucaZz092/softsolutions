@@ -1,86 +1,58 @@
-import { Mail, Phone, MapPin, Linkedin, Github, Globe } from "lucide-react";
+import { Linkedin, Github, MessageCircle } from "lucide-react";
+import { SITE, scrollToId, whatsappLink } from "@/lib/siteConfig";
+
+const LINKS = [
+  { id: "services", label: "Serviços" },
+  { id: "projects", label: "Projetos" },
+  { id: "about", label: "Sobre" },
+  { id: "faq", label: "Dúvidas" },
+  { id: "contact", label: "Contato" },
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const social = "text-muted-foreground hover:text-primary transition-colors";
 
-  function scrollToSection(sectionId: string): void {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  }
   return (
     <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              SoftSolutions
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col items-center gap-5 md:flex-row md:justify-between">
+          <div className="text-center md:text-left">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-brand bg-clip-text text-transparent">
+              {SITE.name}
             </h3>
-            <p className="text-muted-foreground">
-              Transformando ideias em soluções digitais inovadoras. 
-              Sua parceira de confiança em tecnologia.
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/in/perfil-lucas-mendonca/" className="text-muted-foreground hover:text-primary transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="https://github.com/lucaZz092" className="text-muted-foreground hover:text-primary transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Globe className="h-5 w-5" />
-              </a>
-            </div>
+            <p className="text-sm text-muted-foreground">Transformando ideias em soluções digitais.</p>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="text-lg font-semibold text-foreground mb-4">Serviços</h4>
-            <ul className="space-y-2">
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Desenvolvimento Web</a></li>
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Apps Mobile</a></li>
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Cloud Solutions</a></li>
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Consultoria</a></li>
-            </ul>
-          </div>
+          <nav aria-label="Rodapé" className="flex flex-wrap justify-center gap-x-5 gap-y-1">
+            {LINKS.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => scrollToId(id)}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
 
-          {/* Technologies */}
-          <div>
-            <h4 className="text-lg font-semibold text-foreground mb-4">Tecnologias</h4>
-            <ul className="space-y-2">
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">React & TypeScript</a></li>
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">Node.js & Python</a></li>
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">AWS & Docker</a></li>
-              <li><a onClick={() => scrollToSection("services")} className="cursor-pointer text-muted-foreground hover:text-primary transition-colors">PostgreSQL & MongoDB</a></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-lg font-semibold text-foreground mb-4">Contato</h4>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">contato@softsolutions.com.br</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">+55 (11) 97873-7155</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">São Paulo, SP</span>
-              </div>
-            </div>
+          <div className="flex items-center gap-4">
+            <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={social}>
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a href={SITE.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className={social}>
+              <Github className="h-5 w-5" />
+            </a>
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className={social}>
+              <MessageCircle className="h-5 w-5" />
+            </a>
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-8 text-center">
-          <p className="text-muted-foreground">
-            © {currentYear} SoftSolutions. Todos os direitos reservados.
-          </p>
+        <div className="mt-6 border-t border-border pt-4 text-center text-xs text-muted-foreground">
+          © {currentYear} {SITE.name} · {SITE.city} ·{" "}
+          <a href={`mailto:${SITE.email}`} className="hover:text-primary">{SITE.email}</a>
         </div>
       </div>
     </footer>

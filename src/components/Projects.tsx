@@ -1,13 +1,30 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
-import estetica from "@/assets/projects/estetica.png";
-import finorg from "@/assets/projects/finorg.png";
-import marketing from "@/assets/projects/marketing.png";
-import techrecruit from "@/assets/projects/techrecruit.png";
-import webcorp from "@/assets/projects/webcorp.png";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
+import estetica from "@/assets/projects/estetica.webp";
+import finorg from "@/assets/projects/finorg.webp";
+import marketing from "@/assets/projects/marketing.webp";
+import techrecruit from "@/assets/projects/techrecruit.webp";
+import webcorp from "@/assets/projects/webcorp.webp";
+
+// Rótulos em português para as estatísticas exibidas
+const STAT_LABELS: Record<string, string> = {
+  users: "Usuários",
+  uptime: "Disponibilidade",
+  companies: "Empresas",
+  datapoints: "Registros",
+  avgTime: "Tempo médio",
+  downloads: "Downloads",
+  rating: "Avaliação",
+  requests: "Requisições",
+  apiVersion: "Versão da API",
+  regions: "Regiões",
+  conversations: "Conversas",
+  languages: "Idiomas",
+  accuracy: "Precisão",
+};
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -50,7 +67,7 @@ const Projects = () => {
     {
       id: 4,
       title: "Clínica Estética",
-      description: "Site profissional para cl[inica de estética com agendamento online, galeria de tratamentos, depoimentos de clientes e blog integrado para dicas de beleza e saúde.",
+      description: "Site profissional para clínica de estética com agendamento online, galeria de tratamentos, depoimentos de clientes e blog integrado para dicas de beleza e saúde.",
       technologies: ["React", "TypeScript", "Node.js"],
       image: estetica,
       stats: {
@@ -88,20 +105,13 @@ const Projects = () => {
   const currentProject = projects[currentIndex];
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-background via-secondary/5 to-background">
+    <section id="projects" className="py-12 md:py-16 bg-gradient-to-b from-background via-secondary/5 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Nossos Projetos
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Conheça alguns dos projetos que desenvolvemos e transformamos ideias em realidade
-          </p>
-        </div>
+        <SectionHeading title="Nossos Projetos" subtitle="Alguns trabalhos que transformaram ideias em realidade" />
 
         <div className="max-w-5xl mx-auto">
           {/* Carrossel Principal */}
-          <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[500px] relative">
+          <div className="grid lg:grid-cols-2 gap-5 lg:gap-8 items-center relative">
             {/* Botões de Navegação - Fora da imagem */}
             <button
               onClick={goToPrevious}
@@ -123,8 +133,12 @@ const Projects = () => {
             <div className="relative group">
               <img
                 src={currentProject.image}
-                alt={currentProject.title}
-                className="rounded-2xl shadow-2xl w-full object-contain bg-gradient-to-br from-secondary/10 to-accent/10"
+                alt={`Prévia do projeto ${currentProject.title}`}
+                width={1400}
+                height={697}
+                loading="lazy"
+                decoding="async"
+                className="rounded-xl shadow-xl w-full object-contain bg-gradient-to-br from-secondary/10 to-accent/10"
               />
               
               {/* Overlay com Badge */}
@@ -137,20 +151,19 @@ const Projects = () => {
 
             {/* Informações do Projeto */}
             <Card className="border-0 bg-card/50 backdrop-blur-sm shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-3xl font-bold text-foreground mb-2">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-2xl font-bold text-foreground mb-1">
                   {currentProject.title}
                 </CardTitle>
-                <CardDescription className="text-base">
+                <CardDescription className="text-sm md:text-base line-clamp-4">
                   {currentProject.description}
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4">
                 {/* Tecnologias */}
                 <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-3">Tecnologias Utilizadas</h4>
-                  <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-wrap gap-2">
                     {currentProject.technologies.map((tech, index) => (
                       <Badge
                         key={index}
@@ -164,36 +177,29 @@ const Projects = () => {
                 </div>
 
                 {/* Estatísticas */}
-                <div className="grid grid-cols-3 gap-4 py-4 border-t border-b border-border">
-                  {Object.entries(currentProject.stats).map(([key, value]) => (
+                <div className="grid grid-cols-3 gap-4 py-3 border-t border-border">
+                  {Object.entries(currentProject.stats).slice(0, 3).map(([key, value]) => (
                     <div key={key} className="text-center">
-                      <p className="text-xs text-muted-foreground capitalize mb-1">{key}</p>
+                      <p className="text-xs text-muted-foreground mb-1">{STAT_LABELS[key] ?? key}</p>
                       <p className="text-lg font-bold text-primary">{value}</p>
                     </div>
                   ))}
                 </div>
-                {/* Botões de Ação */}
-                {/* <div className="flex gap-3 pt-2">
-                  <Button 
-                    className="flex-1 bg-primary hover:bg-primary/90 text-white"
-                  >
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Ver Projeto
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <Github className="mr-2 h-4 w-4" />
-                    GitHub
-                  </Button>
-                </div> */}
               </CardContent>
             </Card>
           </div>
 
-          {/* Indicadores de Posição */}
-          <div className="flex justify-center gap-2 mt-12">
+          {/* Navegação mobile + indicadores */}
+          <div className="flex items-center justify-center gap-4 mt-4 lg:hidden">
+            <button onClick={goToPrevious} className="bg-primary text-primary-foreground p-2 rounded-full shadow-md" aria-label="Projeto anterior">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button onClick={goToNext} className="bg-primary text-primary-foreground p-2 rounded-full shadow-md" aria-label="Próximo projeto">
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-5 lg:mt-6">
             {projects.map((_, index) => (
               <button
                 key={index}

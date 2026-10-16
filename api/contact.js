@@ -9,6 +9,8 @@ const escapeHtml = (value = "") =>
     '"': "&quot;",
   })[character]);
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default async function handler(request, response) {
   if (request.method === "OPTIONS") {
     return response.status(204).end();
@@ -21,12 +23,29 @@ export default async function handler(request, response) {
     });
   }
 
-  const { name, email, company, message } = request.body || {};
+  const { name, email, company, message, website } = request.body || {};
+
+  // Honeypot: se preenchido, é robô. Responde "sucesso" sem enviar nada.
+  if (website) {
+    return response.status(200).json({ success: true, message: "Mensagem enviada com sucesso!" });
+  }
 
   if (!name || !email || !message) {
     return response.status(400).json({
       success: false,
       message: "Por favor, preencha todos os campos obrigatórios.",
+    });
+  }
+
+  if (
+    !EMAIL_REGEX.test(String(email)) ||
+    String(name).length > 100 ||
+    String(company || "").length > 100 ||
+    String(message).length > 3000
+  ) {
+    return response.status(400).json({
+      success: false,
+      message: "Verifique os dados informados (e-mail válido, nome e mensagem dentro do limite).",
     });
   }
 
@@ -50,7 +69,7 @@ export default async function handler(request, response) {
       from: process.env.EMAIL_USER,
       to: "dev.lucas77@gmail.com",
       replyTo: email,
-      subject: `Novo contato do site - ${name}`,
+      subject: `Novo contato do site - ${String(name).replace(/[\r\n]/g, " ")}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
           <h2>Nova Mensagem de Contato</h2>

@@ -9,9 +9,15 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const emailConfigured = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 
+// Escapa HTML para evitar injeção de conteúdo no e-mail
+const escapeHtml = (value = '') =>
+  String(value).replace(/[&<>'"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[c]);
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '20kb' }));
 
 // Configuração do Nodemailer
 const transporter = nodemailer.createTransport({
@@ -29,13 +35,25 @@ app.get('/api/health', (req, res) => {
 
 // Rota para envio de contato
 app.post('/api/contact', async (req, res) => {
-  const { name, email, company, message } = req.body;
+  const { name, email, company, message, website } = req.body || {};
+
+  // Honeypot: se preenchido, é robô. Responde "sucesso" sem enviar nada.
+  if (website) {
+    return res.json({ success: true, message: 'Mensagem enviada com sucesso!' });
+  }
 
   // Validação básica
   if (!name || !email || !message) {
     return res.status(400).json({ 
       success: false, 
       message: 'Por favor, preencha todos os campos obrigatórios.' 
+    });
+  }
+
+  if (!EMAIL_REGEX.test(String(email)) || String(name).length > 100 || String(message).length > 3000) {
+    return res.status(400).json({
+      success: false,
+      message: 'Verifique os dados informados (e-mail válido, nome e mensagem dentro do limite).'
     });
   }
 
@@ -50,20 +68,20 @@ app.post('/api/contact', async (req, res) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: 'dev.lucas77@gmail.com',
-    subject: `Novo contato do site - ${name}`,
+    subject: `Novo contato do site - ${String(name).replace(/[\r\n]/g, ' ')}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
         <h2 style="color: #333; border-bottom: 2px solid #4F46E5; padding-bottom: 10px;">📧 Nova Mensagem de Contato</h2>
         
         <div style="margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
-          <p style="margin: 10px 0;"><strong>👤 Nome:</strong> ${name}</p>
-          <p style="margin: 10px 0;"><strong>📧 Email:</strong> ${email}</p>
-          ${company ? `<p style="margin: 10px 0;"><strong>🏢 Empresa:</strong> ${company}</p>` : ''}
+          <p style="margin: 10px 0;"><strong>👤 Nome:</strong> ${escapeHtml(name)}</p>
+          <p style="margin: 10px 0;"><strong>📧 Email:</strong> ${escapeHtml(email)}</p>
+          ${company ? `<p style="margin: 10px 0;"><strong>🏢 Empresa:</strong> ${escapeHtml(company)}</p>` : ''}
         </div>
         
         <div style="margin: 20px 0; padding: 15px; background-color: #ffffff; border-left: 4px solid #4F46E5;">
           <h3 style="color: #4F46E5; margin-top: 0;">💬 Mensagem:</h3>
-          <p style="white-space: pre-wrap; line-height: 1.6;">${message}</p>
+          <p style="white-space: pre-wrap; line-height: 1.6;">${escapeHtml(message)}</p>
         </div>
         
         <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0; text-align: center; color: #666; font-size: 12px;">

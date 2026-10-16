@@ -1,73 +1,47 @@
-# Welcome to your  project
+# SoftSolutions
 
-## Project info
+Site institucional da SoftSolutions: https://www.softsolutions.com.br
 
-**URL**: https://.dev/projects/af2f8185-4eed-4891-a3d5-f601f7dce6d5
+## Tecnologias
 
-## How can I edit this code?
+- Vite + React 18 + TypeScript
+- Tailwind CSS + shadcn/ui
+- Função serverless na Vercel (`api/contact.js`) com Nodemailer para o formulário de contato
 
-There are several ways of editing your application.
-
-**Use **
-
-Simply visit the [ Project](https://.dev/projects/af2f8185-4eed-4891-a3d5-f601f7dce6d5) and start prompting.
-
-Changes made via  will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in .
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Rodando localmente
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+npm run dev          # site em http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+Para testar o formulário de contato localmente, suba também o backend:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+cd backend && npm install && cd ..
+npm run server:dev   # API em http://localhost:3001
+```
 
-**Use GitHub Codespaces**
+Veja `FORMULARIO_CONTATO.md` e `backend/README.md` para configurar o e-mail.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Variáveis de ambiente
 
-## What technologies are used for this project?
+| Variável     | Onde         | Descrição                                   |
+| ------------ | ------------ | ------------------------------------------- |
+| `EMAIL_USER` | Vercel / backend | Conta Gmail que envia os e-mails         |
+| `EMAIL_PASS` | Vercel / backend | Senha de app do Gmail (nunca a senha normal) |
 
-This project is built with:
+## Onde editar o conteúdo
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Telefone, e-mail, cidade e redes sociais:** `src/lib/siteConfig.ts`
+- **Seções:** `src/components/` (Hero, Services, Process, Projects, About, FAQ, Contact)
+- **Cores e tema:** `src/index.css` (variáveis HSL, modo claro e escuro)
+- **Imagem de compartilhamento (WhatsApp/LinkedIn):** `public/og-image.png` (1200x630)
 
-## How can I deploy this project?
+## Build e deploy
 
-Simply open [](https://.dev/projects/af2f8185-4eed-4891-a3d5-f601f7dce6d5) and click on Share -> Publish.
+```sh
+npm run build
+```
 
-## Can I connect a custom domain to my  project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs..dev/tips-tricks/custom-domain#step-by-step-guide)
+O deploy é feito pela Vercel (`vercel.json`).

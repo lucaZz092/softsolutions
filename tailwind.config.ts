@@ -48,6 +48,7 @@ export default {
 					DEFAULT: 'hsl(var(--popover))',
 					foreground: 'hsl(var(--popover-foreground))'
 				},
+				brand: 'hsl(var(--blue-secondary))',
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
@@ -69,6 +70,15 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-12px)' }
+				},
+				'blob': {
+					'0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+					'33%': { transform: 'translate(30px, -20px) scale(1.08)' },
+					'66%': { transform: 'translate(-20px, 20px) scale(0.95)' }
+				},
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -87,6 +97,8 @@ export default {
 				}
 			},
 			animation: {
+				'float': 'float 6s ease-in-out infinite',
+				'blob': 'blob 14s ease-in-out infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
