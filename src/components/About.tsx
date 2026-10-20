@@ -3,10 +3,10 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 
 const STATS = [
-  { icon: Users2, value: "100+", label: "Projetos entregues" },
-  { icon: Clock, value: "5+", label: "Anos de experiência" },
+  { icon: Users2, value: "10+", label: "Projetos entregues" },
+  { icon: Clock, value: "3+", label: "Anos de experiência" },
   { icon: TrendingUp, value: "98%", label: "Satisfação" },
-  { icon: Award, value: "50+", label: "Clientes atendidos" },
+  { icon: Award, value: "15+", label: "Clientes atendidos" },
 ];
 
 const VALUES = [
