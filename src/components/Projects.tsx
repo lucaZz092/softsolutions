@@ -142,7 +142,7 @@ const Projects = () => {
               />
               
               {/* Overlay com Badge */}
-              <div className="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end p-8">
+              <div className="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end p-3 sm:p-8">
                 <Badge className="bg-white/20 text-white hover:bg-white/30">
                   Projeto {currentIndex + 1} de {projects.length}
                 </Badge>
@@ -177,11 +177,11 @@ const Projects = () => {
                 </div>
 
                 {/* Estatísticas */}
-                <div className="grid grid-cols-3 gap-4 py-3 border-t border-border">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 py-3 border-t border-border">
                   {Object.entries(currentProject.stats).slice(0, 3).map(([key, value]) => (
                     <div key={key} className="text-center">
                       <p className="text-xs text-muted-foreground mb-1">{STAT_LABELS[key] ?? key}</p>
-                      <p className="text-lg font-bold text-primary">{value}</p>
+                      <p className="text-base sm:text-lg font-bold text-primary">{value}</p>
                     </div>
                   ))}
                 </div>

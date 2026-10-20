@@ -138,7 +138,12 @@ All colors MUST be HSL.
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4rem; /* altura do header fixo */
+    scroll-padding-top: 5rem; /* altura do header fixo, com folga para as seções */
+  }
+
+  body {
+    min-width: 320px;
+    overflow-x: clip;
   }
 
   /* Foco visível para navegação por teclado */
@@ -157,6 +162,13 @@ All colors MUST be HSL.
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+@layer utilities {
+  .safe-area-fab {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    left: calc(1rem + env(safe-area-inset-left, 0px));
   }
 }
 

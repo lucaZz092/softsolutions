@@ -18,10 +18,10 @@ const Services = () => (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading title="Nossos Serviços" subtitle="Tudo o que seu negócio precisa em tecnologia" />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+      <div className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
         {SERVICES.map(({ icon: Icon, title, description, tech }, index) => (
           <Reveal key={title} delay={(index % 4) * 80} className="h-full">
-            <article className="group h-full rounded-xl border border-border bg-card p-4 md:p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <article className="group h-full rounded-xl border border-border bg-card p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                 <Icon className="h-5 w-5" />
               </div>

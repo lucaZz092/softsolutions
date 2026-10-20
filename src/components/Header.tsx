@@ -104,7 +104,7 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="md:hidden pb-3">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-card border border-border rounded-lg mt-1 shadow-lg">
+            <div className="max-h-[calc(100dvh-5rem)] overflow-y-auto px-2 pt-2 pb-3 space-y-1 bg-card border border-border rounded-lg mt-1 shadow-lg">
               {NAV_ITEMS.map(({ id, label }) => (
                 <button
                   key={id}

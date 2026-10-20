@@ -25,19 +25,19 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Texto */}
           <div className="text-center lg:text-left">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary mb-6">
-              <Sparkles className="h-4 w-4" />
+            <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary mb-5 sm:px-4 sm:text-sm sm:mb-6">
+              <Sparkles className="h-4 w-4 shrink-0" />
               Software sob medida para o seu negócio
             </span>
 
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-foreground mb-5 sm:mb-6 leading-tight">
               Soluções de Software
               <span className="block bg-gradient-to-r from-primary to-brand bg-clip-text text-transparent">
                 Inovadoras
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Transformamos suas ideias em software robusto e escalável. Especialistas em
               desenvolvimento personalizado para impulsionar seu negócio.
             </p>
@@ -46,7 +46,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 onClick={() => scrollToId("contact")}
-                className="px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="w-full sm:w-auto px-5 sm:px-8 py-3 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 Solicitar orçamento
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -55,7 +55,7 @@ const Hero = () => {
                 variant="outline"
                 size="lg"
                 asChild
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 text-lg font-semibold transition-all duration-300"
+                className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground px-5 sm:px-8 py-3 text-base sm:text-lg font-semibold transition-all duration-300"
               >
                 <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="mr-2 h-5 w-5" />
@@ -64,7 +64,7 @@ const Hero = () => {
               </Button>
             </div>
 
-            <ul className="flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start text-sm text-muted-foreground">
+            <ul className="flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start text-xs sm:text-sm text-muted-foreground">
               {HIGHLIGHTS.map((item) => (
                 <li key={item} className="flex items-center gap-2 justify-center lg:justify-start">
                   <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />

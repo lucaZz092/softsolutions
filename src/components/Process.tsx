@@ -14,11 +14,11 @@ const Process = () => (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading title="Como Trabalhamos" subtitle="Simples e transparente, da conversa ao projeto no ar" />
 
-      <ol className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+      <ol className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
         {STEPS.map(({ icon: Icon, title, description }, index) => (
           <li key={title}>
             <Reveal delay={index * 100} className="h-full">
-              <div className="flex h-full items-start gap-3 rounded-xl border border-border bg-card p-4">
+              <div className="flex h-full items-start gap-3 rounded-xl border border-border bg-card p-4 sm:p-5">
                 <div className="relative shrink-0">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
